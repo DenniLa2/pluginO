@@ -6,7 +6,7 @@ angular.module('starter.controllers', ['ngCordova'])
       title: 'I am a title',
       message: 'I am great message',
       button: 'My name is Button'
-      };
+    };
 
     $scope.succ = function (res1) {
       var msg = 'good job = "' + res1 + '"';
@@ -14,21 +14,27 @@ angular.module('starter.controllers', ['ngCordova'])
       $scope.success = msg;
     };
 
-    $scope.succ2 = function (res1, res2) {
-      var msg = 'good job2 = "' + res1 + '"' + res2 + '"';
+    $scope.succ2 = function (res1) {
+      var msg = 'good job2 = "' + res1 + '"';
       console.log(msg);
-      $scope.success = msg;
+      alert('A Серёжа молодец!\n\r' + msg);
+      $timeout(function(){$scope.success = msg;});
     };
 
     $scope.alert = function () {
       console.log($scope.al.title, $scope.al.message, $scope.al.button);
-      window.Alert.alert($scope.al.title, $scope.al.message, $scope.al.button, function(){ $timeout($scope.succ)});
+      window.Alert.alert($scope.al.title, $scope.al.message, $scope.al.button, function (d) {
+        $timeout(function(d){$scope.succ(d)})
+      });
     };
 
     $scope.alert2 = function () {
       console.log($scope.al.title, $scope.al.message, $scope.al.button);
-      window.Alert.alert2($scope.al.title, $scope.al.message, $scope.al.button, function(){ $timeout($scope.succ2)});
+      window.Alert.alert2($scope.al.title, $scope.al.message, $scope.al.button, function (d) {
+        $scope.succ2(d);
+      });
     };
+
 
 
     $scope.picker = function () {
@@ -41,6 +47,8 @@ angular.module('starter.controllers', ['ngCordova'])
           alert(data.stringify(error))
         })
     };
+
+
   })
 
   .controller('ChatsCtrl', function ($scope, Chats) {
