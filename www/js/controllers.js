@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCordova'])
 
-  .controller('DashCtrl', function ($scope, $timeout) {
+  .controller('DashCtrl', function ($scope, $timeout, $cordovaImagePicker) {
 
     $scope.al = {
       title: 'I am a title',
@@ -8,15 +8,39 @@ angular.module('starter.controllers', [])
       button: 'My name is Button'
       };
 
-    $scope.succ = function () {
-      console.log('good job');
-      $scope.success = 'good job!';
+    $scope.succ = function (res1) {
+      var msg = 'good job = "' + res1 + '"';
+      console.log(msg);
+      $scope.success = msg;
     };
 
-        $scope.alert = function () {
+    $scope.succ2 = function (res1, res2) {
+      var msg = 'good job2 = "' + res1 + '"' + res2 + '"';
+      console.log(msg);
+      $scope.success = msg;
+    };
+
+    $scope.alert = function () {
       console.log($scope.al.title, $scope.al.message, $scope.al.button);
       window.Alert.alert($scope.al.title, $scope.al.message, $scope.al.button, function(){ $timeout($scope.succ)});
-    }
+    };
+
+    $scope.alert2 = function () {
+      console.log($scope.al.title, $scope.al.message, $scope.al.button);
+      window.Alert.alert2($scope.al.title, $scope.al.message, $scope.al.button, function(){ $timeout($scope.succ2)});
+    };
+
+
+    $scope.picker = function () {
+      $cordovaImagePicker.getPictures()
+        .then(function (data) {
+          alert('OK');
+          alert('выбрано ' + data.length)
+        }, function (error) {
+          alert('ERROR');
+          alert(data.stringify(error))
+        })
+    };
   })
 
   .controller('ChatsCtrl', function ($scope, Chats) {
