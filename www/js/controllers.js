@@ -36,6 +36,16 @@ angular.module('starter.controllers', ['ngCordova'])
     };
 
 
+    $scope.wifi_search = function(){
+      console.log('wifi start');
+      alert('before start plugin');
+      window.WiFiSDPlugin.start_wifisd_search(function(){
+        console.log('wifi plag');
+        alert('i am succes callback of wifi plugin');
+      });
+      alert('after start plugin');
+      console.log('wifi end');
+    };
 
     $scope.picker = function () {
       $cordovaImagePicker.getPictures()
