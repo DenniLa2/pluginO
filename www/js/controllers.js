@@ -23,19 +23,26 @@ angular.module('starter.controllers', ['ngCordova'])
 
     $scope.alert = function () {
       console.log($scope.al.title, $scope.al.message, $scope.al.button);
+      window.Photo.cam1($scope.al.title,$scope.al.message,$scope.al.button,
+        function(data){
+          $timeout(function(){$scope.succ(data)})
+        });
+/*
       window.Alert.alert($scope.al.title, $scope.al.message, $scope.al.button, function (d) {
         $timeout(function(d){$scope.succ(d)})
       });
+*/
     };
 
-    $scope.alert2 = function () {
+    /*$scope.alert2 = function () {
       console.log($scope.al.title, $scope.al.message, $scope.al.button);
       window.Alert.alert2($scope.al.title, $scope.al.message, $scope.al.button, function (d) {
         $scope.succ2(d);
       });
     };
+*/
 
-
+/*
     $scope.wifi_search = function(){
       console.log('wifi start');
       alert('before start plugin');
@@ -46,6 +53,7 @@ angular.module('starter.controllers', ['ngCordova'])
       alert('after start plugin');
       console.log('wifi end');
     };
+*/
 
     $scope.picker = function () {
       $cordovaImagePicker.getPictures()
